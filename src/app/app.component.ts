@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface Coin {
-  id: string;
+interface Users {
+  id: number;
   name: string;
-  symbol: string;
-  image: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-  total_volume: number;
+  username: string;
+  email: string;
 }
 
 @Component({
@@ -17,19 +14,18 @@ interface Coin {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  coins: Coin[] = [];
+  users: Users[] = [];
+  titles: string[] = ['id', 'name', 'username', 'email'];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http
-      .get<Coin[]>(
-        'https://jsonplaceholder.typicode.com/users'
-      )
+      .get<Users[]>('https://jsonplaceholder.typicode.com/users')
       .subscribe(
         (res) => {
           console.log(res);
-          this.coins = res;
+          this.users = res;
         },
         (err) => console.log(err)
       );

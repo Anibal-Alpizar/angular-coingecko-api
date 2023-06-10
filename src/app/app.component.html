@@ -1,1 +1,16 @@
 <h1>Hello world!</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let coin of coins">
+      <td>
+        {{ coin.name }}
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -15,6 +15,7 @@ interface Users {
 })
 export class AppComponent implements OnInit {
   users: Users[] = [];
+  filterUsers: Users[] = [];
   titles: string[] = ['id', 'name', 'username', 'email'];
 
   searchText = '';
@@ -22,8 +23,11 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   searchUser() {
-    this.users = this.users.filter((user) =>
-      user.name.toLowerCase().includes(this.searchText.toLowerCase())
+    this.filterUsers = this.users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        user.username.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        user.email.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
 
@@ -34,6 +38,7 @@ export class AppComponent implements OnInit {
         (res) => {
           console.log(res);
           this.users = res;
+          this.filterUsers = res;
         },
         (err) => console.log(err)
       );

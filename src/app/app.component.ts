@@ -17,7 +17,15 @@ export class AppComponent implements OnInit {
   users: Users[] = [];
   titles: string[] = ['id', 'name', 'username', 'email'];
 
+  searchText = '';
+
   constructor(private http: HttpClient) {}
+
+  searchUser() {
+    this.users = this.users.filter((user) =>
+      user.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
 
   ngOnInit() {
     this.http
